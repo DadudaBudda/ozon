@@ -7,12 +7,6 @@ import requests
 
 response = requests.request(method="GET", url='https://jsonplaceholder.typicode.com/posts')
 body = json.loads(response.text)
-result = []
-
-for i in body:
-    if i['userId'] == 1 and i['id'] == 5:
-        new_d = {}
-        new_d['title'], new_d['body'] = i['title'], i['body']
-        result.append(new_d)
-
+result = [i for i in body if i['userId'] == 1 and i['id'] == 5]
+del result[0]['userId'], result[0]['id']
 print(result)
